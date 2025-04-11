@@ -1,5 +1,10 @@
 ### README
-This is personal tool where i do not want to manage any aliases. If you find this useful, please use it.
+I do not want to manage alias in my bash/zsh shell. 
+
+I do not want to maintain alias for `git checkout main` as `gcm` in my ~/.bashrc file.
+Likewise, there are many aliases that i do not want to manage. Hence i have created this tool for this.
+
+This tool recreates those alias as symlinks in the package. 
 
 ### Installation
 
