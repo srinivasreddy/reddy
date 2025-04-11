@@ -6,4 +6,6 @@ gaa git add .
 gcb git checkout -b
 gp git push
 gpl git pull
+gb git branch
+gcp git cherry-pick
 
