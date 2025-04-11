@@ -17,11 +17,15 @@ fn main() {
     commands.insert("gb", vec!["git", "branch"]);
     commands.insert("gco", vec!["git", "checkout"]);
     commands.insert("gst", vec!["git", "status"]);
-    commands.insert("gl", vec!["git", "log", "--oneline", "--graph", "--decorate"]);
+    commands.insert(
+        "gl",
+        vec!["git", "log", "--oneline", "--graph", "--decorate"],
+    );
     commands.insert("gaa", vec!["git", "add", "."]);
     commands.insert("gcb", vec!["git", "checkout", "-b"]);
     commands.insert("gp", vec!["git", "push"]);
     commands.insert("gpl", vec!["git", "pull"]);
+    commands.insert("gcp", vec!["git", "cherry-pick"]);
 
     match commands.get(cmd_name.as_str()) {
         Some(cmd) => {
