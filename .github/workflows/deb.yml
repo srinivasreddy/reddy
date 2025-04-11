@@ -28,6 +28,7 @@ jobs:
       - name: Prepare .deb structure
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/tags/v}")
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
           mkdir -p reddy_${VERSION}/DEBIAN
           mkdir -p reddy_${VERSION}/usr/local/bin
 
@@ -52,8 +53,7 @@ jobs:
 
       - name: Build .deb package
         run: |
-          VERSION=$(echo "${GITHUB_REF#refs/tags/v}")
-          dpkg-deb --build reddy_${VERSION}
+          dpkg-deb --build reddy_${{ env.VERSION }}
 
       - name: Upload .deb artifact
         uses: actions/upload-artifact@v4
@@ -76,12 +76,11 @@ jobs:
 
       - name: Push to GitHub Packages
         run: |
-          VERSION=$(echo "${GITHUB_REF#refs/tags/v}")
-          # Convert package name to lowercase as required by GitHub Packages
+          # Use VERSION from environment
           OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           # Push the .deb package to GitHub Packages
           curl -u ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} \
             -X PUT \
             -H "Content-Type: application/octet-stream" \
-            --data-binary @reddy_${VERSION}.deb \
-            "https://ghcr.io/v2/$OWNER/reddy/blobs/sha256:$(sha256sum reddy_${VERSION}.deb | cut -d' ' -f1)"
+            --data-binary @reddy_${{ env.VERSION }}.deb \
+            "https://ghcr.io/v2/$OWNER/reddy/blobs/sha256:$(sha256sum reddy_${{ env.VERSION }}.deb | cut -d' ' -f1)"
