@@ -34,7 +34,7 @@ jobs:
 
       - name: Prepare .deb structure
         run: |
-          VERSION=$(echo "${GITHUB_REF#refs/tags/v}")
+          VERSION=$(echo "${GITHUB_REF#refs/tags/v}" || echo "v0.0.1")
           echo "VERSION=${VERSION}" >> $GITHUB_ENV
           mkdir -p reddy_${VERSION}/DEBIAN
           mkdir -p reddy_${VERSION}/usr/local/bin
