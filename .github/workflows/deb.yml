@@ -38,9 +38,8 @@ jobs:
           Section: utils
           Priority: optional
           Architecture: amd64
-          Maintainer: Your Name <you@example.com>
-          Description: Git Command Shortcuts in Rust
-           One binary, many Git shortcuts like gcm, gst, gco, etc.
+          Maintainer: Srinivas Reddy Thatiparthy <thatiparthysreenivas@gmail.com>
+          Description: Alias manager for shell commands.
           EOF
 
           cp target/release/reddy reddy_${VERSION}/usr/local/bin/
