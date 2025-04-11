@@ -1,0 +1,41 @@
+# Rust build directory
+/target/
+
+# Rust package manager directory
+Cargo.lock
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Debug files
+**/*.rs.bk
+
+# Environment files
+.env
+.env.local
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Binary files
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Generated documentation
+/doc/
+
+# Code coverage files
+*.profraw
+coverage/
+
+# Debian package files
+*.deb
+*.changes
+*.dsc
+*.buildinfo
