@@ -14,6 +14,7 @@ fn main() {
     let mut commands: HashMap<&str, Vec<&str>> = HashMap::new();
 
     commands.insert("gcm", vec!["git", "checkout", "main"]);
+    commands.insert("gb", vec!["git", "branch"]);
     commands.insert("gco", vec!["git", "checkout"]);
     commands.insert("gst", vec!["git", "status"]);
     commands.insert("gl", vec!["git", "log", "--oneline", "--graph", "--decorate"]);
