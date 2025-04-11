@@ -3,7 +3,7 @@ This is personal tool where i do not want to manage any aliases. If you find thi
 
 ### Installation
 
-Currently, this package works for only ubuntu systems.  Please go to ``tags`` section in this repo.
+Currently, this package works for only ubuntu systems.  Please go to [Releases](https://github.com/srinivasreddy/reddy/releases)  section in this repo.
 And download the version, mostly latest, you want. Then install it like,
 
 ```
