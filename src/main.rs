@@ -3,6 +3,23 @@ use std::env;
 use std::path::Path;
 use std::process::Command;
 
+fn load_commands() -> HashMap<String, Vec<String>> {
+    let mut commands = HashMap::new();
+    let content = std::fs::read_to_string("src/commands.txt")
+        .expect("Failed to read commands file");
+
+    for line in content.lines() {
+        let parts: Vec<&str> = line.split_whitespace().collect();
+        if parts.is_empty() {
+            continue;
+        }
+        let alias = parts[0].to_string();
+        let command: Vec<String> = parts[1..].iter().map(|&s| s.to_string()).collect();
+        commands.insert(alias, command);
+    }
+    commands
+}
+
 fn main() {
     let invoked_as = env::args().next().unwrap();
     let cmd_name = Path::new(&invoked_as)
@@ -11,21 +28,7 @@ fn main() {
         .to_string_lossy()
         .to_string();
 
-    let mut commands: HashMap<&str, Vec<&str>> = HashMap::new();
-
-    commands.insert("gcm", vec!["git", "checkout", "main"]);
-    commands.insert("gb", vec!["git", "branch"]);
-    commands.insert("gco", vec!["git", "checkout"]);
-    commands.insert("gst", vec!["git", "status"]);
-    commands.insert(
-        "gl",
-        vec!["git", "log", "--oneline", "--graph", "--decorate"],
-    );
-    commands.insert("gaa", vec!["git", "add", "."]);
-    commands.insert("gcb", vec!["git", "checkout", "-b"]);
-    commands.insert("gp", vec!["git", "push"]);
-    commands.insert("gpl", vec!["git", "pull"]);
-    commands.insert("gcp", vec!["git", "cherry-pick"]);
+    let commands = load_commands();
 
     match commands.get(cmd_name.as_str()) {
         Some(cmd) => {
