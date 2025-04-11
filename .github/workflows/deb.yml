@@ -52,7 +52,6 @@ jobs:
           cp target/x86_64-unknown-linux-musl/release/reddy reddy_${VERSION}/usr/local/bin/
 
           cd reddy_${VERSION}/usr/local/bin
-          cd reddy_${VERSION}/usr/local/bin
           while read -r line; do
             # Get the first word from the line
             cmd=$(echo "$line" | awk '{print $1}')
