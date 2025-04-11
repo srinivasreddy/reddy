@@ -24,11 +24,11 @@ jobs:
       - name: Prepare .deb structure
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/tags/v}")
-          mkdir -p gcmd_${VERSION}/DEBIAN
-          mkdir -p gcmd_${VERSION}/usr/local/bin
+          mkdir -p reddy_${VERSION}/DEBIAN
+          mkdir -p reddy_${VERSION}/usr/local/bin
 
-          cat <<EOF > gcmd_${VERSION}/DEBIAN/control
-          Package: gcmd
+          cat <<EOF > reddy_${VERSION}/DEBIAN/control
+          Package: reddy
           Version: ${VERSION}
           Section: utils
           Priority: optional
@@ -38,24 +38,24 @@ jobs:
            One binary, many Git shortcuts like gcm, gst, gco, etc.
           EOF
 
-          cp target/release/gcmd gcmd_${VERSION}/usr/local/bin/
+          cp target/release/reddy reddy_${VERSION}/usr/local/bin/
 
-          cd gcmd_${VERSION}/usr/local/bin
+          cd reddy_${VERSION}/usr/local/bin
           for cmd in gcm gco gst gl gaa gcb gp gpl; do
-            ln -s gcmd "$cmd"
+            ln -s reddy "$cmd"
           done
           cd -
 
       - name: Build .deb package
         run: |
           VERSION=$(echo "${GITHUB_REF#refs/tags/v}")
-          dpkg-deb --build gcmd_${VERSION}
+          dpkg-deb --build reddy_${VERSION}
 
       - name: Upload .deb artifact
         uses: actions/upload-artifact@v4
         with:
-          name: gcmd-deb
-          path: gcmd_*.deb
+          name: reddy-deb
+          path: reddy_*.deb
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
