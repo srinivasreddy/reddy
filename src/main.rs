@@ -32,7 +32,7 @@ fn main() {
 
     match commands.get(cmd_name.as_str()) {
         Some(cmd) => {
-            let mut command = Command::new(cmd[0]);
+            let mut command = Command::new(cmd[0].clone());
             command.args(&cmd[1..]);
 
             for arg in env::args().skip(1) {
