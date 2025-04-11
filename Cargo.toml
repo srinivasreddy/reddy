@@ -1,0 +1,10 @@
+[package]
+name = "reddy"
+version = "0.1.0"
+edition = "2024"
+
+description = "A single Rust binary with git shortcut commands like gcm, gst, etc."
+authors = ["Srinivas Reddy Thatiparthy <thatiparthysreenivas@gmail.com>"]
+license = "MIT"
+
+[dependencies]
