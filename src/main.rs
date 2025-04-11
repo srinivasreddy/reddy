@@ -29,11 +29,14 @@ fn main() {
 
     match commands.get(cmd_name.as_str()) {
         Some(cmd) => {
-            let status = Command::new(cmd[0])
-                .args(&cmd[1..])
-                .status()
-                .expect("Failed to execute command");
+            let mut command = Command::new(cmd[0]);
+            command.args(&cmd[1..]);
 
+            for arg in env::args().skip(1) {
+                command.arg(arg);
+            }
+
+            let status = command.status().expect("Failed to execute command");
             if !status.success() {
                 eprintln!("Command failed");
             }
