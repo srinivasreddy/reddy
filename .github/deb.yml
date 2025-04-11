@@ -1,0 +1,64 @@
+name: Build and Package DEB
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-deb:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          override: true
+
+      - name: Build release binary
+        run: cargo build --release
+
+      - name: Prepare .deb structure
+        run: |
+          VERSION=$(echo "${GITHUB_REF#refs/tags/v}")
+          mkdir -p gcmd_${VERSION}/DEBIAN
+          mkdir -p gcmd_${VERSION}/usr/local/bin
+
+          cat <<EOF > gcmd_${VERSION}/DEBIAN/control
+          Package: gcmd
+          Version: ${VERSION}
+          Section: utils
+          Priority: optional
+          Architecture: amd64
+          Maintainer: Your Name <you@example.com>
+          Description: Git Command Shortcuts in Rust
+           One binary, many Git shortcuts like gcm, gst, gco, etc.
+          EOF
+
+          cp target/release/gcmd gcmd_${VERSION}/usr/local/bin/
+
+          cd gcmd_${VERSION}/usr/local/bin
+          for cmd in gcm gco gst gl gaa gcb gp gpl; do
+            ln -s gcmd "$cmd"
+          done
+          cd -
+
+      - name: Build .deb package
+        run: |
+          VERSION=$(echo "${GITHUB_REF#refs/tags/v}")
+          dpkg-deb --build gcmd_${VERSION}
+
+      - name: Upload .deb artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: gcmd-deb
+          path: gcmd_*.deb
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: gcmd_*.deb
