@@ -1,5 +1,5 @@
 g git
-git_current_branch  git_current_branch(){ git branch --show-current };
+git_current_branch  git_current_branch(){ git branch --show-current }; noglob git_current_branch
 ga git add
 gl git log --oneline --graph --decorate
 gpl git pull
