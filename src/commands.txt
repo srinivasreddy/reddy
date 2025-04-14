@@ -2,7 +2,6 @@ g git
 ga git add
 gl git log --oneline --graph --decorate
 gpl git pull
-gbd git branch -D
 gpo git push origin
 glp git log -p
 gaa git add --all
