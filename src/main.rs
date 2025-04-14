@@ -3,6 +3,24 @@ use std::env;
 use std::path::Path;
 use std::process::Command;
 
+#[test]
+fn test_load_commands() {
+    let mut commands = HashMap::new();
+    let content = include_str!("commands.txt");
+    for line in content.lines() {
+        let parts: Vec<&str> = line.split_whitespace().collect();
+        if parts.is_empty() {
+            continue;
+        }
+        let alias = parts[0].to_string();
+        let command: Vec<String> = parts[1..].iter().map(|&s| s.to_string()).collect();
+        if commands.contains_key(&alias) {
+            panic!("Alias is already in the command: {}", alias);
+        }
+        commands.insert(alias, command);
+    }
+}
+
 fn load_commands() -> HashMap<String, Vec<String>> {
     let mut commands = HashMap::new();
     let content = include_str!("commands.txt");
