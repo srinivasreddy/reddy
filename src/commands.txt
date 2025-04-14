@@ -146,13 +146,11 @@ gsps git show --pretty=short --show-signature
 gsr git svn rebase
 gss git status -s
 gst git status
-gsta git stash push
 gsta git stash save
 gstaa git stash apply
 gstc git stash clear
 gstd git stash drop
 gstl git stash list
-gstp git stash pop
 gsts git stash show --text
 gstu git stash --include-untracked
 gstall git stash --all
