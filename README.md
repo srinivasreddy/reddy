@@ -1,7 +1,7 @@
 ### README
 I don’t want to manually manage aliases in my bash or zsh shell.
 
-For example, I don’t want to add something like alias gcm='git checkout main' in my ~/.bashrc.
+For example, I don’t want to add something like `alias gcm='git checkout main'` in my ~/.bashrc.
 
 There are many such aliases I use, so I built this tool to handle them automatically.
 
