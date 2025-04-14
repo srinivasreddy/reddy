@@ -1,5 +1,5 @@
 g git
-git_current_branch  git_current_branch(){ git branch --show-current }; noglob git_current_branch
+git_current_branch  git_current_branch() { git branch --show-current; }
 ga git add
 gl git log --oneline --graph --decorate
 gpl git pull
@@ -74,7 +74,7 @@ ggp git push origin $(current_branch)
 ggpnp ggl && ggp
 ggpull git pull origin $(git_current_branch)
 ggpur ggu
-ggpush git push origin $(git_current_branch)
+ggpush ggpush() { git push origin $(git_current_branch); }
 ggsup git branch --set-upstream-to=origin/$(git_current_branch)
 ggu git pull --rebase origin $(current_branch)
 gpsup git push --set-upstream origin $(git_current_branch)
