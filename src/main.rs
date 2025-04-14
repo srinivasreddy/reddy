@@ -13,6 +13,10 @@ fn test_load_commands() {
             continue;
         }
         let alias = parts[0].to_string();
+        if alias.starts_with("#") {
+            println!("Skipping comment: {}", line);
+            continue;
+        }
         let command: Vec<String> = parts[1..].iter().map(|&s| s.to_string()).collect();
         if commands.contains_key(&alias) {
             panic!("Alias is already in the command: {}", alias);
@@ -31,6 +35,10 @@ fn load_commands() -> HashMap<String, Vec<String>> {
             continue;
         }
         let alias = parts[0].to_string();
+        if alias.starts_with("#") {
+            println!("Skipping comment: {}", line);
+            continue;
+        }
         let command: Vec<String> = parts[1..].iter().map(|&s| s.to_string()).collect();
         commands.insert(alias, command);
     }
