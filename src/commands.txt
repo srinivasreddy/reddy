@@ -1,13 +1,11 @@
 g git
 ga git add
-gcm git checkout main
 gl git log --oneline --graph --decorate
 gaa git add .
 gpl git pull
 gbd git branch -D
 gpo git push origin
 glp git log -p
-gcm git commit -m
 gaa git add --all
 gapa git add --patch
 gau git add --update
