@@ -5,8 +5,7 @@ use std::process::Command;
 
 fn load_commands() -> HashMap<String, Vec<String>> {
     let mut commands = HashMap::new();
-    let content = std::fs::read_to_string("commands.txt")
-        .expect("Failed to read commands file");
+    let content = include_str!("commands.txt");
 
     for line in content.lines() {
         let parts: Vec<&str> = line.split_whitespace().collect();
