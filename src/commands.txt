@@ -11,3 +11,5 @@ gcp git cherry-pick
 gbd git branch -D
 gpo git push origin
 glp git log -p
+gsh git show
+gcm git commit -m
