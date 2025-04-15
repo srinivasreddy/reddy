@@ -24,12 +24,12 @@ jobs:
         
     - name: Create App Bundle
       run: |
-        mkdir -p target/release/reddy/Contents/MacOS
-        mkdir -p target/release/reddy/Contents/Resources
-        cp target/release/reddy target/release/reddy/Contents/MacOS/
+        mkdir -p target/release/reddy.app/Contents/MacOS
+        mkdir -p target/release/reddy.app/Contents/Resources
+        cp target/release/reddy target/release/reddy.app/Contents/MacOS/
         
         # Create Info.plist
-        cat > target/release/reddy/Contents/Info.plist << EOF
+        cat > target/release/reddy.app/Contents/Info.plist << EOF
         <?xml version="1.0" encoding="UTF-8"?>
         <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
         <plist version="1.0">
