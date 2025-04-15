@@ -69,3 +69,12 @@ jobs:
       with:
         name: reddy-mac
         path: reddy.dmg
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        files: reddy.dmg
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
