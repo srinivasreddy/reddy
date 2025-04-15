@@ -1,6 +1,6 @@
 g git
 py python
-git_current_branch  git_current_branch() { git branch --show-current; }
+git_current_branch git branch --show-current
 ga git add
 gl git log --oneline --graph --decorate
 gpl git pull
@@ -68,16 +68,16 @@ gfg git ls-files | grep
 gfo git fetch origin
 gg git gui citool
 gga git gui citool --amend
-ggf git push --force origin $(current_branch)
-ggfl git push --force-with-lease origin $(current_branch)
-ggl git pull origin $(current_branch)
-ggp git push origin $(current_branch)
+ggf git push --force origin $(git_current_branch)
+ggfl git push --force-with-lease origin $(git_current_branch)
+ggl git pull origin $(git_current_branch)
+ggp git push origin $(git_current_branch)
 ggpnp ggl && ggp
 ggpull git pull origin $(git_current_branch)
 ggpur ggu
-ggpush ggpush() { git push origin $(git_current_branch); }
+ggpush  git push origin $(git_current_branch)
 ggsup git branch --set-upstream-to=origin/$(git_current_branch)
-ggu git pull --rebase origin $(current_branch)
+ggu git pull --rebase origin $(git_current_branch)
 gpsup git push --set-upstream origin $(git_current_branch)
 ghh git help
 gignore git update-index --assume-unchanged
