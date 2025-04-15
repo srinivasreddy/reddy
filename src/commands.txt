@@ -70,12 +70,12 @@ gg git gui citool
 gga git gui citool --amend
 ggf git push --force origin $(git branch --show-current)
 ggfl git push --force-with-lease origin $(git branch --show-current)
-ggl git pull origin $(git branch --show-current)
-ggp git push origin $(git branch --show-current)
+ggl git pull origin "$(git branch --show-current)"
+ggp git push origin "$(git branch --show-current)"
 ggpnp ggl && ggp
-ggpull git pull origin $(git branch --show-current)
+ggpull git pull origin "$(git branch --show-current)"
 ggpur ggu
-ggpush  git push origin $(git branch --show-current)
+ggpush  git push origin "$(git branch --show-current)"
 ggsup git branch --set-upstream-to=origin/$(git branch --show-current)
 ggu git pull --rebase origin $(git branch --show-current)
 gpsup git push --set-upstream origin $(git branch --show-current)
