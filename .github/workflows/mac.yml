@@ -1,0 +1,71 @@
+name: Mac Build
+
+on:
+    push:
+      tags:
+        - 'v*'
+
+permissions:
+    contents: write
+    packages: write
+  
+jobs:
+  build:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Install Rust
+      uses: dtolnay/rust-toolchain@stable
+      
+    - name: Build Release
+      run: cargo build --release
+        
+    - name: Create App Bundle
+      run: |
+        mkdir -p target/release/reddy/Contents/MacOS
+        mkdir -p target/release/reddy/Contents/Resources
+        cp target/release/reddy target/release/reddy/Contents/MacOS/
+        
+        # Create Info.plist
+        cat > target/release/reddy/Contents/Info.plist << EOF
+        <?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+        <plist version="1.0">
+        <dict>
+            <key>CFBundleName</key>
+            <string>reddy</string>
+            <key>CFBundleDisplayName</key>
+            <string>reddy</string>
+            <key>CFBundleIdentifier</key>
+            <string>com.yourcompany.reddy</string>
+            <key>CFBundleVersion</key>
+            <string>1.0.0</string>
+            <key>CFBundlePackageType</key>
+            <string>APPL</string>
+            <key>CFBundleExecutable</key>
+            <string>reddy</string>
+        </dict>
+        </plist>
+        EOF
+
+    - name: Create DMG
+      run: |
+        brew install create-dmg
+        create-dmg \
+          --volname "reddy" \
+          --window-pos 200 120 \
+          --window-size 800 400 \
+          --icon-size 100 \
+          --icon "reddy.app" 200 190 \
+          --hide-extension "reddy.app" \
+          --app-drop-link 600 185 \
+          "reddy.dmg" \
+          "target/release/reddy.app"
+          
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: reddy-mac
+        path: reddy.dmg
